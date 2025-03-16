@@ -6,6 +6,9 @@ import kotlin.random.Random
 data class Location private constructor(val x: Int, val y: Int) {
 
     companion object {
+        val X_COORDINATE_RANGE = 1..10
+        val Y_COORDINATE_RANGE = 1..10
+
         fun create(x: Int, y: Int): Location {
             return Location(x, y)
         }
@@ -18,8 +21,8 @@ data class Location private constructor(val x: Int, val y: Int) {
     }
 
     init {
-        require(x in 1..10) { "X coordinate must be between 1 and 10" }
-        require(y in 1..10) { "Y coordinate must be between 1 and 10" }
+        require(x in X_COORDINATE_RANGE) { "X coordinate must be between $X_COORDINATE_RANGE" }
+        require(y in Y_COORDINATE_RANGE) { "Y coordinate must be between $Y_COORDINATE_RANGE" }
     }
 
     override fun equals(other: Any?): Boolean {
