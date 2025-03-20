@@ -1,4 +1,4 @@
-package domain.sharedkernel.model
+package domain.model
 
 import domain.model.courieraggregate.Transport
 import domain.model.sharedkernel.Location
