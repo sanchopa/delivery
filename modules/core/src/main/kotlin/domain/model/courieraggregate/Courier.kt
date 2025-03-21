@@ -31,6 +31,16 @@ data class Courier private constructor(
         require(name.isNotBlank()) { "Name must not be blank" }
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Courier) return false
+        return id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
     fun setStatusBusy() = this.copy(status = CourierStatus.BUSY)
 
     fun setStatusFree() = this.copy(status = CourierStatus.FREE)

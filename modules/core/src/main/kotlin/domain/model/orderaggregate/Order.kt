@@ -13,6 +13,16 @@ data class Order private constructor(
         fun create(id: UUID, location: Location) = Order(id, location, OrderStatus.CREATED)
     }
 
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Order) return false
+        return id == other.id
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
+
     fun assign(courierId: UUID) = copy(status = OrderStatus.ASSIGNED, courierId = courierId)
 
     fun complete(): Order {
