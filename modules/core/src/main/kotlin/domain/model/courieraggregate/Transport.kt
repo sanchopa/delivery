@@ -14,6 +14,7 @@ data class Transport(
     }
 
     init {
+        require(name.isNotBlank()) { "Name must not be blank" }
         require(speed in TRANSPORT_SPEED_RANGE) { "The speed should be between $TRANSPORT_SPEED_RANGE" }
     }
 
