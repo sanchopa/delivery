@@ -1,0 +1,9 @@
+server:
+  port: 10310
+spring:
+  application:
+    name: delivery
+  datasource:
+    url: jdbc:postgresql://localhost:5433/delivery
+    username: delivery
+    password: Pass123
