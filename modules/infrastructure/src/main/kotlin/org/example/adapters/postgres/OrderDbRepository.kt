@@ -1,12 +1,12 @@
 package org.example.adapters.postgres
 
-import java.util.UUID
 import org.example.adapters.postgres.jpa.OrderJpaRepository
 import org.example.adapters.postgres.mapper.OrderMapper
 import org.example.domain.model.orderaggregate.Order
 import org.example.domain.model.orderaggregate.OrderStatus
 import org.example.ports.OrderRepository
 import org.springframework.stereotype.Service
+import java.util.UUID
 
 @Service
 class OrderDbRepository(
@@ -27,5 +27,10 @@ class OrderDbRepository(
 
     override fun getAssignedOrders(): List<Order> {
         return orderJpaRepository.findByStatus(OrderStatus.ASSIGNED.name).map { orderMapper.toDomain(it) }
+    }
+
+    override fun getCreatedAndAssignedOrders(): List<Order> {
+        return orderJpaRepository.findByStatus(listOf(OrderStatus.CREATED.name, OrderStatus.ASSIGNED.name))
+            .map { orderMapper.toDomain(it) }
     }
 }

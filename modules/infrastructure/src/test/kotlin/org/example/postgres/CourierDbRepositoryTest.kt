@@ -1,6 +1,5 @@
 package org.example.postgres
 
-import java.util.UUID
 import org.example.Generator
 import org.example.TestConfig
 import org.example.adapters.postgres.CourierDbRepository
@@ -14,6 +13,7 @@ import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.test.context.ContextConfiguration
+import java.util.UUID
 
 @ContextConfiguration(
     classes = [TestConfig::class,
@@ -73,6 +73,28 @@ class CourierDbRepositoryTest : AbstractRepositoryTest() {
         courierRepository.upsertCourier(busyCourier)
 
         val retrievedCouriers = courierRepository.getFreeCouriers()
+
+        assertEquals(emptyList<Courier>(), retrievedCouriers)
+    }
+
+    @Test
+    fun `should get busy couriers`() {
+        val busyCourier1 = Generator.createCourier().setStatusBusy()
+        val busyCourier2 = Generator.createCourier().setStatusBusy()
+        courierRepository.upsertCourier(busyCourier1)
+        courierRepository.upsertCourier(busyCourier2)
+
+        val retrievedCouriers = courierRepository.getBusyCouriers()
+
+        assertEquals(listOf(busyCourier1, busyCourier2), retrievedCouriers)
+    }
+
+    @Test
+    fun `should return empty list when no busy couriers found`() {
+        val freeCourier = Generator.createCourier().setStatusFree()
+        courierRepository.upsertCourier(freeCourier)
+
+        val retrievedCouriers = courierRepository.getBusyCouriers()
 
         assertEquals(emptyList<Courier>(), retrievedCouriers)
     }

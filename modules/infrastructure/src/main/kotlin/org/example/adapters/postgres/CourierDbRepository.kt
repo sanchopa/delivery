@@ -1,6 +1,5 @@
 package org.example.adapters.postgres
 
-import java.util.UUID
 import org.example.adapters.postgres.jpa.CourierJpaRepository
 import org.example.adapters.postgres.jpa.TransportJpaRepository
 import org.example.adapters.postgres.mapper.CourierMapper
@@ -9,6 +8,7 @@ import org.example.domain.model.courieraggregate.CourierStatus
 import org.example.ports.CourierRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.UUID
 
 @Service
 class CourierDbRepository(
@@ -29,5 +29,9 @@ class CourierDbRepository(
 
     override fun getFreeCouriers(): List<Courier> {
         return courierJpaRepository.getByStatus(CourierStatus.FREE.name).map { courierMapper.toDomain(it) }
+    }
+
+    override fun getBusyCouriers(): List<Courier> {
+        return courierJpaRepository.getByStatus(CourierStatus.BUSY.name).map { courierMapper.toDomain(it) }
     }
 }
