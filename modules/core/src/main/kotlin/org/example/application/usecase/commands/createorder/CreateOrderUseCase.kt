@@ -5,7 +5,7 @@ import org.example.domain.model.sharedkernel.Location
 import org.example.ports.OrderRepository
 import org.springframework.transaction.annotation.Transactional
 
-class CreateOrderUseCase(
+open class CreateOrderUseCase(
     private val orderRepository: OrderRepository
 ) {
     @Transactional
