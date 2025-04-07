@@ -3,7 +3,7 @@ package org.example.application.usecase.queries.getorders
 import org.example.domain.model.orderaggregate.Order
 import org.example.ports.OrderRepository
 
-class GetCreatedAndAssignedOrdersUseCase(
+open class GetCreatedAndAssignedOrdersUseCase(
     private val orderRepository: OrderRepository
 ) {
     fun execute(): GetCreatedAndAssignedOrdersResponse {

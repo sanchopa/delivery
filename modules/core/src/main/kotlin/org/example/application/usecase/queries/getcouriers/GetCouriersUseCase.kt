@@ -3,7 +3,7 @@ package org.example.application.usecase.queries.getcouriers
 import org.example.domain.model.courieraggregate.Courier
 import org.example.ports.CourierRepository
 
-class GetCouriersUseCase(
+open class GetCouriersUseCase(
     private val courierRepository: CourierRepository
 ) {
     fun execute(): GetCouriersResponse {
